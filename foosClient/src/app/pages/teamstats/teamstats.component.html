@@ -1,0 +1,44 @@
+<div class="teamstats-container">
+	<div>
+			<h1>Team Stats!</h1>
+			<h2 *ngIf="!!details">{{details.player_one_name}} &amp; {{details.player_two_name}} (Ranking: {{details.ranking}})</h2>
+	</div>
+	<div class="graph-container">
+		<svg id="graph"></svg>
+  </div>
+  <app-time-series data="mappedhistory"></app-time-series>
+	<div *ngIf="!stats">
+			{{loadingMessage}}
+	</div>
+	<table *ngIf="!!stats" id="leaders-table">
+		<thead>
+			<tr>
+				<th>Opponents</th>
+				<th>Score</th>
+				<th>Change</th>
+				<th>Ranking</th>
+				<th>Played On</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let game of stats" [ngClass]="{'animate-row': game.highlight}">
+				<td><a [routerLink]="['/team-games/',game.opposing_team_id]">{{game.opposing_player_one}} -
+						{{game.opposing_player_two}}</a></td>
+				<td>
+					<span *ngIf="game.won && game.opponent_points < 5" class="mdi mdi-crown disrespect"
+						title="disrespectful"></span>
+					<span *ngIf="!game.won">&nbsp;</span>{{game.points}} - {{game.opponent_points}}<span
+						*ngIf="game.won">&nbsp;</span>&nbsp;
+					<span class="game-won" *ngIf="game.won">W</span>
+					<span class="game-lost" *ngIf="!game.won">L</span>
+				</td>
+				<td>{{game.change}}</td>
+				<td>{{game.current_ranking}}</td>
+				<td>{{game.played_on}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="no-results" *ngIf="!stats || stats.length === 0">
+		No results <span class="mdi mdi-emoticon-poop"></span>
+	</div>
+</div>

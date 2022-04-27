@@ -1,0 +1,63 @@
+
+
+
+<ng-container *ngIf="games.length === 0">
+  <div>
+    <h2>Game Type</h2>
+    <div (click)="setGameMode(4)" class="game-type">
+      <app-checkbox-input [isChecked]="numOfPlayers === 4" ></app-checkbox-input>
+      Standard Rules (4 players)
+    </div>
+    <div (click)="setGameMode(5)" class="game-type">
+      <app-checkbox-input [isChecked]="numOfPlayers === 5" ></app-checkbox-input>
+      Gauntlet (5 players)
+    </div>
+    <hr>
+
+  </div>
+  <div class="new-match-container">
+
+    <ng-container>
+      <div *ngFor="let player of numbers; let i = index" class="player-container mt-3 mb-3">
+        <span class="mr-2">Player {{i+1}}</span>
+        <app-type-ahead (selectedItemChange)="activePlayers[i] = $event" [dropDown]="true" [options]="allPlayers" key="name" ></app-type-ahead>
+      </div>
+    </ng-container>
+
+    <div class="btn-foos" (click)="startGame()">Start Game</div>
+    <button class="btn-foos-secondary" (click)="close()">Nevermind</button>
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="games.length > 0">
+  <div class="result-header">
+    <span>Game Results</span>
+    <span>Spread</span>
+  </div>
+  <div *ngFor="let game of games; let i = index;">
+    <div class="game-container">
+      <div class="team" (click)="gameResults[i].winners === game.team_one.id ? gameResults[i].winners = null : gameResults[i].winners = game.team_one.id">
+        {{game.team_one.player_one.name}} and {{game.team_one.player_two.name}}
+        <app-checkbox-input class="ml-2" [isChecked]="gameResults[i].winners === game.team_one.id" ></app-checkbox-input>
+      </div>
+      <span class="ml-3 mr-3">vs</span>
+      <div class="team" (click)="gameResults[i].winners === game.team_two.id ? gameResults[i].winners = null : gameResults[i].winners = game.team_two.id">
+        {{game.team_two.player_one.name}} and {{game.team_two.player_two.name}}
+        <app-checkbox-input class="ml-2" [isChecked]="gameResults[i].winners === game.team_two.id" ></app-checkbox-input>
+      </div>
+      <input type="text" class="form-control spread-input" [(ngModel)]="gameResults[i].spread">
+    </div>
+  </div>
+
+  <div class="btn-container">
+    <div class="btn-foos" (click)="finishGame()">Finish Game</div>
+    <button class="btn-foos-secondary" (click)="close()">Nevermind</button>
+    <app-flip-container [open]="errMsg">
+      <div class="err mt-3">{{errMsg}}</div>
+    </app-flip-container>
+
+  </div>
+
+
+</ng-container>

@@ -1,0 +1,99 @@
+h1 .material-icons {
+  font-size: 1em;
+}
+
+.ding {
+  color: #f2a003;
+}
+
+.action-buttons,
+.stat-table,
+.stat-controls {
+  margin: 32px 0px 32px 32px;
+  display: flex;
+  align-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.action-buttons > *,
+.stat-controls > * {
+  margin-right: 16px;
+  padding: 8px;
+  min-width: 250px;
+  margin-bottom: 8px;
+}
+
+.action-buttons button,
+.stat-controls button {
+  color: white;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.action-buttons button:hover,
+.stat-controls button:hover
+{
+  filter: brightness(120%);
+}
+
+.action-buttons button:nth-child(1) {
+  border: none;
+  background-color: #ac2934;
+}
+
+.action-buttons button:nth-child(2) {
+  border: 2px solid #ac2934;
+  background-color: #17293e;
+}
+
+.stat-controls span {
+  color: white;
+  font-size: 2em;
+  padding: 0px;
+}
+
+.stat-controls button {
+  background-color: #17293e;
+  border: none;
+}
+
+.stat-controls .button-selected {
+  border: 2px solid white;
+}
+
+.search-box input {
+  padding: 0px 16px 0px 16px;
+  color: white;
+  border: none;
+  background-color: #25374d;
+  font-size: 1em;
+  margin-bottom: 0px;
+  min-width: 220px;
+}
+
+.stat-controls > .search-box {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 0px;
+}
+
+.search-box span {
+  position: relative;
+  right: 29px;
+  font-size: 24px;
+}
+
+@media only screen and (max-width: 950px) {
+  .stat-controls > .search-box {
+    margin-left: 0px;
+  }
+
+  .action-buttons,
+  .stat-table,
+  .stat-controls {
+    margin: 32px 0px 0px 0px;
+  }
+}

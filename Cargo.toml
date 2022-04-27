@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "foos_web",
+    "foos_cli",
+    "foos",
+]
